@@ -1,0 +1,27 @@
+### Create Person
+
+POST http://localhost:5240/api/person HTTP/1.1
+Accept-Language: ka-GE
+Content-Type: application/json
+
+{
+  "firstName": "lamara",
+  "lastName": "gebeskiria",
+  "gender": Gender.Female,
+  "personalNumber": "42001039540",
+  "dateOfBirth": "1985-05-14T00:00:00",
+  "cityId": 3,
+  "phoneNumbers": [
+    {
+      "type": MobileType.Mobile,
+      "number": "555-888-777"
+    }
+  ]
+}
+
+
+### Get Persons
+
+GET http://localhost:5240/api/person?page=1&pageSize=-10 HTTP/1.1
+Accept-Language: ka-GE
+

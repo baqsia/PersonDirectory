@@ -1,0 +1,68 @@
+﻿version: '3.9'
+
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: persondb
+    ports:
+      - "14333:1433"
+    environment:
+      SA_PASSWORD: "DbPass2025!"
+      ACCEPT_EULA: "Y"
+    networks:
+      - person-network
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.17.9
+    container_name: elastic
+    environment:
+      - discovery.type=single-node
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - xpack.security.enabled=false
+    ports:
+      - "9200:9200"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - elasticsearch-data:/usr/share/elasticsearch/data
+    networks:
+      - person-network
+        
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.17.9
+    container_name: kibana
+    ports:
+      - "5601:5601"
+    environment:
+      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+    networks:
+      - person-network
+    depends_on:
+      - elasticsearch
+
+  api:
+    build:
+      context: .
+      dockerfile: ./src/Task.PersonDirectory.Api/Dockerfile
+    container_name: person-api
+    ports:
+      - "5240:8080"
+    depends_on:
+      - sqlserver
+      - elasticsearch
+    networks:
+      - person-network
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__PersonDirectory=Server=persondb,1433;Database=PersonDirectory;User Id=sa;Password=DbPass2025!;Encrypt=false
+      - ConnectionStrings__Elasticsearch=http://elasticsearch:9200
+
+volumes:
+  elasticsearch-data:
+
+networks:
+  person-network:
+    driver: bridge

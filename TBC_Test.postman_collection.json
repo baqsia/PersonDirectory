@@ -1,0 +1,298 @@
+{
+	"info": {
+		"_postman_id": "8c89cf95-c32f-4a78-b7ee-9c238df2c10c",
+		"name": "TBC Test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "9264795"
+	},
+	"item": [
+		{
+			"name": "Create Person",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept-Language",
+						"value": "ka-GE",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"firstName\": \"lamara\",\r\n  \"lastName\": \"gebeskiria\",\r\n  \"gender\": \"female\",\r\n  \"personalNumber\": \"42001039540\",\r\n  \"dateOfBirth\": \"1985-05-14T00:00:00\",\r\n  \"cityId\": 3,\r\n  \"phoneNumbers\": [\r\n    {\r\n      \"type\": \"mobile\",\r\n      \"number\": \"555-888-777\"\r\n    }\r\n  ]\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5240/api/person",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5240",
+					"path": [
+						"api",
+						"person"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Health Check",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept-Language",
+						"value": "ka-GE",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:5240/health",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5240",
+					"path": [
+						"health"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Person",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept-Language",
+						"value": "ka-GE",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"firstName\": \"baqar\",\r\n  \"lastName\": \"gogia\",\r\n  \"gender\": \"male\",\r\n  \"personalNumber\": \"12345678901\",\r\n  \"dateOfBirth\": \"1990-01-01T00:00:00\",\r\n  \"cityId\": 1,\r\n  \"phoneNumbers\": [\r\n    {\r\n      \"type\": \"mobile\",\r\n      \"number\": \"555-1234\"\r\n    },\r\n    {\r\n      \"type\": \"home\",\r\n      \"number\": \"555-5678\"\r\n    }\r\n  ]\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5240/api/person/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5240",
+					"path": [
+						"api",
+						"person",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Image",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept-Language",
+						"value": "ka-GE",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/C:/Users/User/Pictures/Saved Pictures/Screenshot 2025-06-13 193732.png"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:5240/api/person/1/upload-image",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5240",
+					"path": [
+						"api",
+						"person",
+						"1",
+						"upload-image"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Persons",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept-Language",
+						"value": "ka-GE",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:5240/api/person?page=1&pageSize=-10",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5240",
+					"path": [
+						"api",
+						"person"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "-10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Person",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept-Language",
+						"value": "ka-GE",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:5240/api/person/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5240",
+					"path": [
+						"api",
+						"person",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Locatiozation",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept-Language",
+						"value": "ka",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:5240/api/person/test-localization",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5240",
+					"path": [
+						"api",
+						"person",
+						"test-localization"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Connection Report",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept-Language",
+						"value": "ka-GE",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:5240/api/person/connections-report",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5240",
+					"path": [
+						"api",
+						"person",
+						"connections-report"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Persons Connect",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept-Language",
+						"value": "ka-GE",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"personId\": 3,\r\n    \"connection\": \"colleague\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5240/api/person/1/connect",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5240",
+					"path": [
+						"api",
+						"person",
+						"1",
+						"connect"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
