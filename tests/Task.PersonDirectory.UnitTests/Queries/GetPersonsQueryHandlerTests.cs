@@ -1,4 +1,5 @@
 using Elasticsearch.Net;
+using Microsoft.Extensions.Logging;
 using Moq;
 using Nest;
 using Shouldly;
@@ -18,12 +19,14 @@ public class GetPersonsQueryHandlerTests
     private Mock<IElasticStatusChecker> _elasticStatusCheckerMock = null!;
     private Mock<IElasticClient> _elasticClientMock = null!;
     private Mock<IPersonRepository> _personRepoMock = null!;
+    private Mock<ILogger<GetPersonsQueryHandler>> _loggerMock = null!;
     private Mock<IImageStorage> _imageStorageMock = null!;
     private GetPersonsQueryHandler _sut = null!;
 
     [SetUp]
     public void Setup()
     {
+        _loggerMock = new Mock<ILogger<GetPersonsQueryHandler>>();
         _elasticStatusCheckerMock = new Mock<IElasticStatusChecker>();
         _elasticClientMock = new Mock<IElasticClient>();
         _personRepoMock = new Mock<IPersonRepository>();
@@ -31,6 +34,7 @@ public class GetPersonsQueryHandlerTests
 
         _sut = new GetPersonsQueryHandler(
             _elasticStatusCheckerMock.Object,
+            _loggerMock.Object,
             _elasticClientMock.Object,
             _personRepoMock.Object,
             _imageStorageMock.Object
@@ -68,7 +72,7 @@ public class GetPersonsQueryHandlerTests
         mockResponse.Setup(r => r.IsValid).Returns(true);
         
         _elasticClientMock
-            .Setup(ec => ec.SearchAsync<PersonSearchDocument>(
+            .Setup(ec => ec.SearchAsync(
                 It.IsAny<Func<SearchDescriptor<PersonSearchDocument>, ISearchRequest>>(),
                 It.IsAny<CancellationToken>()))
             .ReturnsAsync(mockResponse.Object);

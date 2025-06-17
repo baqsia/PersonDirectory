@@ -1,5 +1,6 @@
 ﻿using Elasticsearch.Net;
 using Mediator;
+using Microsoft.Extensions.Logging;
 using Nest;
 using Task.PersonDirectory.Application.Common.SyncPerson;
 using Task.PersonDirectory.Application.DTOs;
@@ -10,13 +11,15 @@ using Task.PersonDirectory.Infrastructure.Specifications;
 namespace Task.PersonDirectory.Application.Queries.GetPersons;
 
 public class GetPersonsQueryHandler(
-    IElasticStatusChecker  elasticStatusChecker,
+    IElasticStatusChecker elasticStatusChecker,
+    ILogger<GetPersonsQueryHandler> logger,
     IElasticClient elasticClient,
     IPersonRepository personRepository,
     IImageStorage imageStorage
 ) : IRequestHandler<GetPersonsQuery, ResponseResult<PagedResult<PersonDto>>>
 {
-    public async ValueTask<ResponseResult<PagedResult<PersonDto>>> Handle(GetPersonsQuery request, CancellationToken cancellationToken)
+    public async ValueTask<ResponseResult<PagedResult<PersonDto>>> Handle(GetPersonsQuery request,
+        CancellationToken cancellationToken)
     {
         var health = await elasticStatusChecker.GetHealthStatusAsync(cancellationToken);
         if (health != Health.Red)
@@ -27,8 +30,10 @@ public class GetPersonsQueryHandler(
         return await QueryDatabaseAsync(request, cancellationToken);
     }
 
-    private async Task<ResponseResult<PagedResult<PersonDto>>> QueryDatabaseAsync(GetPersonsQuery request,
-        CancellationToken cancellationToken)
+    private async Task<ResponseResult<PagedResult<PersonDto>>> QueryDatabaseAsync(
+        GetPersonsQuery request,
+        CancellationToken cancellationToken
+    )
     {
         var specification = new PersonListSpecification(
                 !string.IsNullOrWhiteSpace(request.QuickSearch),
@@ -71,8 +76,10 @@ public class GetPersonsQueryHandler(
         return new PagedResult<PersonDto>(results, totalCount, request.Page, request.PageSize);
     }
 
-    private async Task<ResponseResult<PagedResult<PersonDto>>> QueryReadDatabaseAsync(GetPersonsQuery request,
-        CancellationToken cancellationToken)
+    private async Task<ResponseResult<PagedResult<PersonDto>>> QueryReadDatabaseAsync(
+        GetPersonsQuery request,
+        CancellationToken cancellationToken
+    )
     {
         var must = GenerateQueryContainer(request);
 
@@ -81,16 +88,18 @@ public class GetPersonsQueryHandler(
                 .From((request.Page - 1) * request.PageSize)
                 .Size(request.PageSize)
                 .Query(q => q.Bool(b => b.Must(must.ToArray())))
-            , cancellationToken);
+                .TrackTotalHits(),
+            cancellationToken
+        );
 
         if (!searchResponse.IsValid)
-            throw new Exception("Failed to search: " + searchResponse.OriginalException.Message);
-
-        var documents = searchResponse.Documents
-            .ToList();
+        {
+            logger.LogError(searchResponse.OriginalException, searchResponse.OriginalException?.Message);
+            return new ResponseResult<PagedResult<PersonDto>>(new PagedResult<PersonDto>([], 0, request.Page, request.PageSize));
+        }
 
         var results = new List<PersonDto>();
-        foreach (var doc in documents)
+        foreach (var doc in searchResponse.Documents)
         {
             var personDto = new PersonDto(
                 doc.PersonId,
@@ -120,22 +129,22 @@ public class GetPersonsQueryHandler(
             {
                 Should = new List<QueryContainer>
                 {
-                    new WildcardQuery { Field = "firstName.keyword", Value = $"*{request.QuickSearch.ToLower()}*" },
-                    new WildcardQuery { Field = "lastName.keyword", Value = $"*{request.QuickSearch.ToLower()}*" },
-                    new WildcardQuery { Field = "personalNumber.keyword", Value = $"*{request.QuickSearch}*" }
+                    new MatchPhrasePrefixQuery { Field = "firstName", Query = request.QuickSearch.ToLower() },
+                    new MatchPhrasePrefixQuery { Field = "lastName", Query = request.QuickSearch.ToLower() },
+                    new MatchPhrasePrefixQuery { Field = "personalNumber", Query = request.QuickSearch }
                 },
                 MinimumShouldMatch = 1
             });
         }
 
         if (!string.IsNullOrWhiteSpace(request.FirstName))
-            must.Add(new TermQuery { Field = "firstName", Value = request.FirstName });
+            must.Add(new TermQuery { Field = "firstName.keyword", Value = request.FirstName });
 
         if (!string.IsNullOrWhiteSpace(request.LastName))
-            must.Add(new TermQuery { Field = "lastName", Value = request.LastName });
+            must.Add(new TermQuery { Field = "lastName.keyword", Value = request.LastName });
 
         if (!string.IsNullOrWhiteSpace(request.PersonalNumber))
-            must.Add(new TermQuery { Field = "personalNumber", Value = request.PersonalNumber });
+            must.Add(new TermQuery { Field = "personalNumber.keyword", Value = request.PersonalNumber });
 
         if (request.Gender is not null)
             must.Add(new TermQuery { Field = "gender", Value = request.Gender });
