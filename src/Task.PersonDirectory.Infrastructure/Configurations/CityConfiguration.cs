@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Task.PersonDirectory.Domain;
+using Task.PersonDirectory.Domain.Aggregates;
 
 namespace Task.PersonDirectory.Infrastructure.Configurations;
 

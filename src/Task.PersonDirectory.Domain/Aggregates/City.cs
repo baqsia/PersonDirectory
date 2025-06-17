@@ -1,4 +1,4 @@
-﻿namespace Task.PersonDirectory.Domain;
+﻿namespace Task.PersonDirectory.Domain.Aggregates;
 
 public class City
 {

@@ -15,7 +15,6 @@ var app = builder.Build();
 app.MapOpenApi();
 app.UseHttpsRedirection();
 app.UseRouting();
-
 app.UseAuthorization();
 app.UseExceptionHandler();
 app.MapHealthChecks("/health");

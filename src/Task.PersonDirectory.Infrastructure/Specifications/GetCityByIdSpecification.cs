@@ -1,4 +1,5 @@
 ﻿using Task.PersonDirectory.Domain;
+using Task.PersonDirectory.Domain.Aggregates;
 
 namespace Task.PersonDirectory.Infrastructure.Specifications;
 

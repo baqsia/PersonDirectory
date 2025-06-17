@@ -11,7 +11,7 @@ public class DefaultExceptionHandler(ILogger<DefaultExceptionHandler> logger) : 
         Exception exception,
         CancellationToken cancellationToken)
     {
-        logger.LogError(exception, "Unhandled exception at {Time}", DateTime.UtcNow);
+        logger.LogError(exception, "Unhandled exception {Exception}, at {Time}", exception, DateTime.UtcNow);
 
         httpContext.Response.ContentType = "application/problem+json";
 
@@ -44,10 +44,12 @@ public class DefaultExceptionHandler(ILogger<DefaultExceptionHandler> logger) : 
             Detail = exception.Message,
             Status = StatusCodes.Status500InternalServerError,
             Instance = httpContext.Request.Path,
-            Type = "https://tools.ietf.org/html/rfc7231#section-6.6.1"
+            Type = "https://tools.ietf.org/html/rfc7231#section-6.6.1",
+            Extensions =
+            {
+                ["traceId"] = httpContext.TraceIdentifier
+            }
         };
-
-        problem.Extensions["traceId"] = httpContext.TraceIdentifier;
 
         httpContext.Response.StatusCode = problem.Status.Value;
         await httpContext.Response.WriteAsJsonAsync(problem, cancellationToken: cancellationToken);

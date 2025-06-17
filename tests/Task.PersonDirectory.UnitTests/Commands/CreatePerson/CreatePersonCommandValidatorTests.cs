@@ -1,7 +1,6 @@
 using FluentValidation.TestHelper;
 using Moq;
 using Task.PersonDirectory.Application.Commands.CreatePerson;
-using Task.PersonDirectory.Application.Common;
 using Task.PersonDirectory.Application.DTOs;
 using Task.PersonDirectory.Application.Services;
 using Task.PersonDirectory.Domain.ValueObjects;

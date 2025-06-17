@@ -1,6 +1,6 @@
-﻿using Task.PersonDirectory.Domain.Aggregates;
+﻿using Task.PersonDirectory.Domain.ValueObjects;
 
-namespace Task.PersonDirectory.Domain;
+namespace Task.PersonDirectory.Domain.Aggregates;
 
 public class RelatedPerson
 {

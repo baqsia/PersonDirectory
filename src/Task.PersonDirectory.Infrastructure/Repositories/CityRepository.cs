@@ -1,6 +1,7 @@
 ﻿using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 using Task.PersonDirectory.Domain;
+using Task.PersonDirectory.Domain.Aggregates;
 using Task.PersonDirectory.Infrastructure.Context;
 using Task.PersonDirectory.Infrastructure.Repositories.Segregation;
 using Task.PersonDirectory.Infrastructure.Specifications;

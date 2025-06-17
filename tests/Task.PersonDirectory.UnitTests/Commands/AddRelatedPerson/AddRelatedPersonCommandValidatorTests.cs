@@ -5,6 +5,7 @@ using Task.PersonDirectory.Application.Common;
 using Task.PersonDirectory.Application.DTOs;
 using Task.PersonDirectory.Application.Services;
 using Task.PersonDirectory.Domain;
+using Task.PersonDirectory.Domain.ValueObjects;
 
 namespace Task.PersonDirectory.UnitTests.Commands.AddRelatedPerson;
 

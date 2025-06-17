@@ -5,6 +5,7 @@ using Nest;
 using Task.PersonDirectory.Application.Common.SyncPerson;
 using Task.PersonDirectory.Application.DTOs;
 using Task.PersonDirectory.Domain;
+using Task.PersonDirectory.Domain.Aggregates;
 using Task.PersonDirectory.Infrastructure.Context;
 
 namespace Task.PersonDirectory.Application.Queries.GetConnectionReport;

@@ -1,4 +1,5 @@
 ﻿using Task.PersonDirectory.Domain;
+using Task.PersonDirectory.Domain.Aggregates;
 using Task.PersonDirectory.Infrastructure.Context;
 
 namespace Task.PersonDirectory.Infrastructure.Seed;
