@@ -1,16 +1,11 @@
 ﻿using Elasticsearch.Net;
 using Mediator;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Nest;
 using Task.PersonDirectory.Application.Common.SyncPerson;
 using Task.PersonDirectory.Application.DTOs;
 using Task.PersonDirectory.Application.Services;
-using Task.PersonDirectory.Domain;
-using Task.PersonDirectory.Domain.Aggregates;
-using Task.PersonDirectory.Infrastructure.Context;
 using Task.PersonDirectory.Infrastructure.Repositories;
-using Task.PersonDirectory.Infrastructure.Specifications;
 
 namespace Task.PersonDirectory.Application.Queries.GetConnectionReport;
 
