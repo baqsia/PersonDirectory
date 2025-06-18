@@ -84,7 +84,7 @@ public class GetPersonsQueryHandler(
         var must = GenerateQueryContainer(request);
 
         var searchResponse = await elasticClient.SearchAsync<PersonSearchDocument>(s => s
-                .Index("persons")
+                .Index("persons_ngram")
                 .From((request.Page - 1) * request.PageSize)
                 .Size(request.PageSize)
                 .Query(q => q.Bool(b => b.Must(must.ToArray())))
@@ -129,9 +129,9 @@ public class GetPersonsQueryHandler(
             {
                 Should = new List<QueryContainer>
                 {
-                    new MatchPhrasePrefixQuery { Field = "firstName", Query = request.QuickSearch.ToLower() },
-                    new MatchPhrasePrefixQuery { Field = "lastName", Query = request.QuickSearch.ToLower() },
-                    new MatchPhrasePrefixQuery { Field = "personalNumber", Query = request.QuickSearch }
+                    new MatchQuery { Field = "firstName", Query = request.QuickSearch.ToLower() },
+                    new MatchQuery { Field = "lastName", Query = request.QuickSearch.ToLower() },
+                    new MatchQuery { Field = "personalNumber", Query = request.QuickSearch }
                 },
                 MinimumShouldMatch = 1
             });

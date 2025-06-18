@@ -1,0 +1,59 @@
+PUT /persons_ngram
+{
+  "settings": {
+    "index": {
+      "max_ngram_diff": 18
+    },
+    "analysis": {
+      "analyzer": {
+        "ngram_analyzer": {
+          "type": "custom",
+          "tokenizer": "ngram_tokenizer",
+          "filter": ["lowercase"]
+        }
+      },
+      "tokenizer": {
+        "ngram_tokenizer": {
+          "type": "ngram",
+          "min_gram": 2,
+          "max_gram": 20,
+          "token_chars": ["letter", "digit"]
+        }
+      }
+    }
+  },
+  "mappings": {
+    "properties": {
+      "personId": { "type": "integer" },
+      "firstName": { "type": "text", "analyzer": "ngram_analyzer" },
+      "lastName": { "type": "text", "analyzer": "ngram_analyzer" },
+      "personalNumber": { "type": "text", "analyzer": "ngram_analyzer" },
+      "gender": { "type": "keyword" },
+      "dateOfBirth": { "type": "date" },
+      "cityId": { "type": "integer" },
+      "imageUrl": { "type": "keyword" },
+      "phoneNumbers": {
+        "type": "nested",
+        "properties": {
+          "number": { "type": "keyword" },
+          "type": { "type": "keyword" }
+        }
+      },
+      "relations": {
+        "type": "nested",
+        "properties": {
+          "relatedToId": { "type": "integer" },
+          "relationType": { "type": "keyword" }
+        }
+      }
+    }
+  }
+}
+
+
+
+POST /_reindex
+{
+  "source": { "index": "persons" },
+  "dest": { "index": "persons_ngram" }
+}
