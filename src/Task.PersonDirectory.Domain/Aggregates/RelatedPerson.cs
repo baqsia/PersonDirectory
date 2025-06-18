@@ -4,14 +4,14 @@ namespace Task.PersonDirectory.Domain.Aggregates;
 
 public class RelatedPerson
 {
-    public int Id { get; set; }
-    public RelatedPersonConnection ConnectionType { get; set; } = default!; // colleague, acquaintance, relative, other
+    public int Id { get; init; }
+    public RelatedPersonConnection ConnectionType { get; init; }
 
-    public int PersonId { get; set; }
-    public Person Person { get; set; } = default!;
+    public int PersonId { get; init; }
+    public Person Person { get; init; } = null!;
 
-    public int RelatedToId { get; set; }
-    public Person RelatedTo { get; set; } = default!;
+    public int RelatedToId { get; init; }
+    public Person RelatedTo { get; init; } = null!;
 
     public static RelatedPerson Connect(Person person, Person relatedPerson, RelatedPersonConnection connectionType)
     {

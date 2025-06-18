@@ -4,7 +4,7 @@ namespace Task.PersonDirectory.Domain.Aggregates;
 
 public class PhoneNumber
 {
-    public int Id { get; set; }
-    public MobileType Type { get; set; } = default!; // mobile, office, home
-    public string Number { get; set; } = default!;
+    public int Id { get; init; }
+    public MobileType Type { get; init; }
+    public string Number { get; init; } = null!;
 }
