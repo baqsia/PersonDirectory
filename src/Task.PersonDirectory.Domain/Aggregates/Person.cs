@@ -8,16 +8,15 @@ public class Person
     {
     }
 
-    public int Id { get; set; }
-    public string FirstName { get; set; } = null!;
-    public string LastName { get; set; } = null!;
-    public Gender Gender { get; set; }
-    public string PersonalNumber { get; set; } = null!;
-    public DateTime DateOfBirth { get; set; }
+    public int Id { get; private init; }
+    public string FirstName { get; private set; } = null!;
+    public string LastName { get; private set; } = null!;
+    public Gender Gender { get; private set; }
+    public string PersonalNumber { get; private set; } = null!;
+    public DateTime DateOfBirth { get; private set; }
     public string? ImagePath { get; set; }
-
-    public int CityId { get; set; }
-    public City City { get; init; } = null!;
+    public int CityId { get; private set; }
+    public City City { get; private init; } = null!;
 
     private readonly List<PhoneNumber> _phoneNumbers = [];
     public IReadOnlyList<PhoneNumber> PhoneNumbers => _phoneNumbers.AsReadOnly();

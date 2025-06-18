@@ -58,8 +58,7 @@ public class GetPersonQueryHandlerTests
 
         var related = Person.Create("Anna", "Smith", Gender.Female, "09876543210", new DateTime(1990, 5, 10), 2);
         person.ApplyRelation(related, RelatedPersonConnection.Relative);
-
-        person.Id = 42;
+ 
         person.ImagePath = "img.png";
 
         _personRepositoryMock
@@ -84,7 +83,6 @@ public class GetPersonQueryHandlerTests
             {
                 res.ShouldNotBeNull();
                 var data = res.Result;
-                data.Id.ShouldBe(42);
                 data.Image.ShouldBe("base64-image");
                 data.PhoneNumbers.Count.ShouldBe(1);
                 data.RelatedPersons.Count.ShouldBe(1);
