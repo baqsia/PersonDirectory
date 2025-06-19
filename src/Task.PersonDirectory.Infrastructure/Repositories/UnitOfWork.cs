@@ -1,13 +1,7 @@
-﻿using Task.PersonDirectory.Infrastructure.Context;
+﻿using Task.PersonDirectory.Application.Repository;
+using Task.PersonDirectory.Infrastructure.Context;
 
 namespace Task.PersonDirectory.Infrastructure.Repositories;
-
-public interface IUnitOfWork
-{
-    IPersonRepository Persons { get; }
-
-    System.Threading.Tasks.Task SaveChangesAsync(CancellationToken cancellationToken = default);
-}
 
 public class UnitOfWork(
     PersonDirectoryContext context,

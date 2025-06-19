@@ -2,10 +2,8 @@
 using Mediator;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Nest;
 using Task.PersonDirectory.Application.Common;
-using Task.PersonDirectory.Application.Common.SyncPerson;
 using Task.PersonDirectory.Application.Common.ValidationPipeline;
 using Task.PersonDirectory.Application.HealthChecks;
 using Task.PersonDirectory.Application.Services;
@@ -37,8 +35,6 @@ public static class Dependency
         });
 
         services.AddScoped<IOutboxDispatcher, OutboxDispatcher>();
-        services.AddScoped<IPersonSearchIndexer, PersonSearchIndexer>();
-
         services.AddScoped<IElasticStatusChecker, ElasticStatusChecker>();
         services.AddHealthChecks()
             .AddCheck<ElasticHealthCheck>("Elastic HealthCheck");

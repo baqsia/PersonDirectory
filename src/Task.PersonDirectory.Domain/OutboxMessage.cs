@@ -1,4 +1,4 @@
-﻿namespace Task.PersonDirectory.Infrastructure.Context;
+﻿namespace Task.PersonDirectory.Domain;
 
 public class OutboxMessage
 {

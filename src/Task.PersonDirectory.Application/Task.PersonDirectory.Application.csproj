@@ -15,12 +15,15 @@
         <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       </PackageReference>
       <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.6" />
+      <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="9.0.6" />
+      <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks" Version="9.0.6" />
+      <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="9.0.6" />
       <PackageReference Include="NEST" Version="7.17.5" />
       <PackageReference Include="OneOf" Version="3.0.271" />
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Task.PersonDirectory.Infrastructure\Task.PersonDirectory.Infrastructure.csproj" />
+      <ProjectReference Include="..\Task.PersonDirectory.Domain\Task.PersonDirectory.Domain.csproj" />
     </ItemGroup>
 
 </Project>

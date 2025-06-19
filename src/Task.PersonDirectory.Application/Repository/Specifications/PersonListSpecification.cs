@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Task.PersonDirectory.Application.Repository.Specifications;
 using Task.PersonDirectory.Domain.Aggregates;
 using Task.PersonDirectory.Domain.ValueObjects;
 

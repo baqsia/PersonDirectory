@@ -2,6 +2,7 @@ using Moq;
 using Shouldly;
 using Task.PersonDirectory.Application.Errors;
 using Task.PersonDirectory.Application.Queries.GetPerson;
+using Task.PersonDirectory.Application.Repository;
 using Task.PersonDirectory.Application.Services;
 using Task.PersonDirectory.Domain;
 using Task.PersonDirectory.Domain.Aggregates;

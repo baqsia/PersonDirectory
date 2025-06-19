@@ -18,7 +18,8 @@ public class ValidationBehavior<TRequest, TResponse>(IEnumerable<IValidator<TReq
         var context = new ValidationContext<TRequest>(message);
 
         var failures = (await System.Threading.Tasks.Task.WhenAll(
-                validators.Select(v => v.ValidateAsync(context, cancellationToken))))
+                validators.Select(v => v.ValidateAsync(context, cancellationToken)))
+            )
             .SelectMany(r => r.Errors)
             .Where(f => f != null)
             .ToList();

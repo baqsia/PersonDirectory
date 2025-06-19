@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Task.PersonDirectory.Application.Repository.Specifications;
 using Task.PersonDirectory.Infrastructure.Specifications;
 
 namespace Task.PersonDirectory.Infrastructure.Repositories;
@@ -15,9 +16,6 @@ public class BaseRepository<TEntity> where TEntity : class
         query = spec.Includes.Aggregate(query, (current, include) => current.Include(include));
 
         query = spec.IncludeStrings.Aggregate(query, (current, include) => current.Include(include));
-
-        if (spec.OrderBy is not null)
-            query = spec.OrderBy(query);
 
         return query;
     }

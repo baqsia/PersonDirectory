@@ -1,14 +1,13 @@
 ﻿using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
+using Task.PersonDirectory.Application.Repository;
+using Task.PersonDirectory.Application.Repository.Specifications;
 using Task.PersonDirectory.Domain;
 using Task.PersonDirectory.Domain.Aggregates;
 using Task.PersonDirectory.Infrastructure.Context;
-using Task.PersonDirectory.Infrastructure.Repositories.Segregation;
 using Task.PersonDirectory.Infrastructure.Specifications;
 
 namespace Task.PersonDirectory.Infrastructure.Repositories;
-
-public interface ICityRepository : IReadOneRepository<City>;
 
 public class CityRepository(PersonDirectoryContext context) : BaseRepository<City>, ICityRepository
 {

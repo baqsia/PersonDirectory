@@ -1,21 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Task.PersonDirectory.Application.Repository;
+using Task.PersonDirectory.Application.Repository.Specifications;
 using Task.PersonDirectory.Domain;
 using Task.PersonDirectory.Domain.Aggregates;
 using Task.PersonDirectory.Infrastructure.Context;
-using Task.PersonDirectory.Infrastructure.Repositories.Segregation;
 using Task.PersonDirectory.Infrastructure.Specifications;
 
 namespace Task.PersonDirectory.Infrastructure.Repositories;
-
-public interface IPersonRepository :
-    IReadOneRepository<Person>,
-    IReadManyRepository<Person>,
-    ICreateRepository<Person>,
-    IUpdateRepository<Person>,
-    IDeleteRepository<Person>
-{
-    Task<int> CountAsync(ISpecification<Person> specification, CancellationToken cancellationToken);
-}
 
 public class PersonRepository(PersonDirectoryContext context) : BaseRepository<Person>, IPersonRepository
 {

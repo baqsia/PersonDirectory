@@ -5,6 +5,7 @@ using Task.PersonDirectory.Application.Common.SyncPerson;
 using Task.PersonDirectory.Application.DTOs;
 using Task.PersonDirectory.Application.Errors;
 using Task.PersonDirectory.Application.Events;
+using Task.PersonDirectory.Application.Repository;
 using Task.PersonDirectory.Application.Services;
 using Task.PersonDirectory.Domain;
 using Task.PersonDirectory.Domain.Aggregates;

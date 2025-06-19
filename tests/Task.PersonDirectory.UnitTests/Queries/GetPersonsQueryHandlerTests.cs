@@ -5,6 +5,7 @@ using Nest;
 using Shouldly;
 using Task.PersonDirectory.Application.Common.SyncPerson;
 using Task.PersonDirectory.Application.Queries.GetPersons;
+using Task.PersonDirectory.Application.Repository;
 using Task.PersonDirectory.Application.Services;
 using Task.PersonDirectory.Domain.Aggregates;
 using Task.PersonDirectory.Domain.ValueObjects;

@@ -16,6 +16,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Task.PersonDirectory.UnitTe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Task.PersonDirectory.IntegrationTests", "tests\Task.PersonDirectory.IntegrationTests\Task.PersonDirectory.IntegrationTests.csproj", "{5297B9A7-F48D-4561-8E78-70422C4ED24C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Task.PersonDirectory.OutboxWorker", "src\Task.PersonDirectory.OutboxWorker\Task.PersonDirectory.OutboxWorker.csproj", "{322532BF-EA0D-4C99-9C94-A2951317865B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -28,6 +30,7 @@ Global
 		{70D4B667-E74A-4414-972F-054A862FC50F} = {2C0F7C6D-87A3-4374-BB27-A012DADE59E8}
 		{4640E383-F0AD-4F00-B8BA-F77B35D7A736} = {27DFF25B-F810-40A5-B203-EF1E1EB134F3}
 		{5297B9A7-F48D-4561-8E78-70422C4ED24C} = {27DFF25B-F810-40A5-B203-EF1E1EB134F3}
+		{322532BF-EA0D-4C99-9C94-A2951317865B} = {2C0F7C6D-87A3-4374-BB27-A012DADE59E8}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{958008AA-9685-48BE-9B38-A95616044450}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -54,5 +57,9 @@ Global
 		{5297B9A7-F48D-4561-8E78-70422C4ED24C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5297B9A7-F48D-4561-8E78-70422C4ED24C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5297B9A7-F48D-4561-8E78-70422C4ED24C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{322532BF-EA0D-4C99-9C94-A2951317865B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{322532BF-EA0D-4C99-9C94-A2951317865B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{322532BF-EA0D-4C99-9C94-A2951317865B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{322532BF-EA0D-4C99-9C94-A2951317865B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

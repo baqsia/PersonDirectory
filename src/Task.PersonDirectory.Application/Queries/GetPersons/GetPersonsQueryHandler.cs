@@ -4,8 +4,8 @@ using Microsoft.Extensions.Logging;
 using Nest;
 using Task.PersonDirectory.Application.Common.SyncPerson;
 using Task.PersonDirectory.Application.DTOs;
+using Task.PersonDirectory.Application.Repository;
 using Task.PersonDirectory.Application.Services;
-using Task.PersonDirectory.Infrastructure.Repositories;
 using Task.PersonDirectory.Infrastructure.Specifications;
 
 namespace Task.PersonDirectory.Application.Queries.GetPersons;

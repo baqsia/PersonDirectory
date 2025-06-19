@@ -1,5 +1,6 @@
 ﻿using System.Text.Json;
-using Task.PersonDirectory.Infrastructure.Context;
+using Task.PersonDirectory.Application.Repository;
+using Task.PersonDirectory.Domain;
 
 namespace Task.PersonDirectory.Application.Services;
 
@@ -9,18 +10,18 @@ public interface IOutboxDispatcher
         where TEvent : class;
 }
 
-public class OutboxDispatcher(PersonDirectoryContext context) : IOutboxDispatcher
+public class OutboxDispatcher(IOutboxRepository outboxRepository) : IOutboxDispatcher
 {
     public async System.Threading.Tasks.Task DispatchAsync<TEvent>(TEvent @event, CancellationToken cancellationToken)
         where TEvent : class
     {
-        await context.Set<OutboxMessage>()
-            .AddAsync(new OutboxMessage
+        await outboxRepository.AddAsync(
+            new OutboxMessage
             {
                 Type = @event.GetType().Name,
                 OccurredOn = DateTime.Now,
                 Payload = JsonSerializer.Serialize(@event),
-            }, cancellationToken);
-        await context.SaveChangesAsync(cancellationToken);
+            }, cancellationToken
+        );
     }
 }

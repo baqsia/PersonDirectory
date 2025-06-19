@@ -1,16 +1,8 @@
-﻿using Microsoft.Extensions.Logging;
-using Nest;
+﻿using Nest;
 using Task.PersonDirectory.Application.Common.SyncPerson;
 using Task.PersonDirectory.Application.Events;
 
-namespace Task.PersonDirectory.Application.Services;
-
-public interface IPersonSearchIndexer
-{
-    System.Threading.Tasks.Task IndexAsync(PersonCreated created, CancellationToken cancellationToken = default);
-    System.Threading.Tasks.Task UpdateAsync(PersonUpdated updated, CancellationToken cancellationToken = default);
-    System.Threading.Tasks.Task DeleteAsync(PersonDeleted deleted, CancellationToken cancellationToken = default);
-}
+namespace Task.PersonDirectory.OutboxWorker;
 
 public class PersonSearchIndexer(
     IElasticClient elasticClient,

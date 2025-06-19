@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Task.PersonDirectory.Application.Repository;
 using Task.PersonDirectory.Infrastructure.Context;
 using Task.PersonDirectory.Infrastructure.Repositories;
 using Task.PersonDirectory.Infrastructure.Seed;
@@ -32,6 +33,7 @@ public static class Dependency
         services.AddScoped<IPersonRepository, PersonRepository>();
         services.AddScoped<ICityRepository, CityRepository>();
         services.AddScoped<IRelatedPersonRepository, RelatedPersonRepository>();
+        services.AddScoped<IOutboxRepository, OutboxRepository>();
         
         services.AddHealthChecks()
             .AddSqlServer(

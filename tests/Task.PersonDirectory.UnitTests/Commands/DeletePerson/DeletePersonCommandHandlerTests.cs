@@ -3,6 +3,7 @@ using Shouldly;
 using Task.PersonDirectory.Application.Commands.DeletePerson;
 using Task.PersonDirectory.Application.Errors;
 using Task.PersonDirectory.Application.Events;
+using Task.PersonDirectory.Application.Repository;
 using Task.PersonDirectory.Application.Services;
 using Task.PersonDirectory.Domain.Aggregates;
 using Task.PersonDirectory.Domain.ValueObjects;

@@ -56,8 +56,7 @@ public class Person
         Gender gender,
         string personalNumber,
         DateTime dateOfBirth,
-        int cityId,
-        List<PhoneNumber> phoneNumbers
+        int cityId
     )
     {
         FirstName = firstName;
@@ -67,8 +66,6 @@ public class Person
         DateOfBirth = dateOfBirth;
         CityId = cityId;
 
-        _phoneNumbers.Clear();
-        _phoneNumbers.AddRange(phoneNumbers);
         return this;
     }
 

@@ -23,6 +23,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\Task.PersonDirectory.Application\Task.PersonDirectory.Application.csproj" />
       <ProjectReference Include="..\Task.PersonDirectory.Domain\Task.PersonDirectory.Domain.csproj" />
     </ItemGroup>
 

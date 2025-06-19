@@ -3,8 +3,6 @@ using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Localization;
 using Task.PersonDirectory.Api.Http;
 using Task.PersonDirectory.Api.Resources;
-using Task.PersonDirectory.Application.Common;
-using Task.PersonDirectory.Application.Common.SyncPerson;
 using Task.PersonDirectory.Application.Services;
 
 namespace Task.PersonDirectory.Api;
@@ -36,8 +34,6 @@ public static class Dependency
             });
 
         services.AddExceptionHandler<DefaultExceptionHandler>();
-        services.AddHostedService<OutboxProcessor>();
-        
         services.AddScoped<IResourceLocalizer, ResourceLocalizer>();
         services.AddLocalization(options => options.ResourcesPath = "Resources");
         services.Configure<RequestLocalizationOptions>(options =>

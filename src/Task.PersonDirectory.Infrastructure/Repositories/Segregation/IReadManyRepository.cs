@@ -1,4 +1,5 @@
-﻿using Task.PersonDirectory.Infrastructure.Specifications;
+﻿using Task.PersonDirectory.Application.Repository.Specifications;
+using Task.PersonDirectory.Infrastructure.Specifications;
 
 namespace Task.PersonDirectory.Infrastructure.Repositories.Segregation;
 

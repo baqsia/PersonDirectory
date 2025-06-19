@@ -2,8 +2,8 @@
 using Task.PersonDirectory.Application.DTOs;
 using Task.PersonDirectory.Application.Errors;
 using OneOf;
+using Task.PersonDirectory.Application.Repository;
 using Task.PersonDirectory.Application.Services;
-using Task.PersonDirectory.Infrastructure.Repositories;
 using Task.PersonDirectory.Infrastructure.Specifications;
 
 namespace Task.PersonDirectory.Application.Queries.GetPerson;
